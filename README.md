@@ -1,6 +1,9 @@
 # Zesty Scopes
 
-TODO.
+A project to present horoscope content managed by the Zesty.io Content Management System for delivery to multiple channels:
+
+* Website (presentation and hosting also by Zesty.io)
+* Amazon Alexa Skill
 
 ## Resources
 
