@@ -5,6 +5,21 @@ A project to present horoscope content managed by the Zesty.io Content Managemen
 * Website (presentation and hosting also by Zesty.io)
 * Amazon Alexa Skill
 
+## API Endpoints
+
+### Get all Star Signs
+
+```
+http://zestyscopes.zesty.site/-/custom/signs.json
+```
+
+### Get all Traits for all Star Signs
+
+```
+http://zestyscopes.zesty.site/-/custom/traits.json
+```
+
+
 ## Resources
 
 * [Zesty.io Developer Resources](https://developer.zesty.io/)
