@@ -10,14 +10,21 @@ A project to present horoscope content managed by the Zesty.io Content Managemen
 ### Get all Star Signs
 
 ```
-http://zestyscopes.zesty.site/-/custom/signs.json
+http://zestyscopes.zesty.site/-/custom/starsigns.json
 ```
+
+### Get Star Sign by Name
+
+```
+http://zestyscopes.zesty.site/-/custom/starsign.json?sign=taurus
+```
+
 
 ### Get all Traits for all Star Signs
 
 ```
 http://zestyscopes.zesty.site/-/custom/traits.json
-```
+``
 
 
 ## Resources
