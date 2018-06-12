@@ -13,12 +13,16 @@ A project to present horoscope content managed by the Zesty.io Content Managemen
 http://zestyscopes.zesty.site/-/custom/starsigns.json
 ```
 
+[Try it](http://zestyscopes.zesty.site/-/custom/starsigns.json).
+
 ### Get Star Sign by Name
 
 ```
 http://zestyscopes.zesty.site/-/custom/starsign.json?sign=taurus
 ```
 
+[Try it](
+http://zestyscopes.zesty.site/-/custom/starsign.json?sign=taurus).
 
 ### Get all Traits for all Star Signs
 
@@ -26,11 +30,15 @@ http://zestyscopes.zesty.site/-/custom/starsign.json?sign=taurus
 http://zestyscopes.zesty.site/-/custom/traits.json
 ```
 
+[Try it](http://zestyscopes.zesty.site/-/custom/traits.json).
+
 ### Get all Readings for all Star Signs
 
 ```
 http://zestyscopes.zesty.site/-/custom/readings.json
 ```
+
+[Try it](http://zestyscopes.zesty.site/-/custom/readings.json).
 
 
 ## Resources
