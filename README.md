@@ -24,7 +24,13 @@ http://zestyscopes.zesty.site/-/custom/starsign.json?sign=taurus
 
 ```
 http://zestyscopes.zesty.site/-/custom/traits.json
-``
+```
+
+### Get all Readings for all Star Signs
+
+```
+http://zestyscopes.zesty.site/-/custom/readings.json
+```
 
 
 ## Resources
