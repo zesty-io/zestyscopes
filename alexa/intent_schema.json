@@ -16,20 +16,133 @@
                     "samples": []
                 },
                 {
-                    "name": "HelloWorldIntent",
-                    "slots": [],
+                    "name": "StarSignDatesIntent",
+                    "slots": [
+                        {
+                            "name": "star_sign",
+                            "type": "STAR_SIGN"
+                        }
+                    ],
                     "samples": [
-                        "how are you",
-                        "hi",
-                        "say hi world",
-                        "say hi",
-                        "hello",
-                        "say hello world",
-                        "say hello"
+                        "when is {star_sign} ",
+                        "what time of year are people born under {star_sign}",
+                        "what time of year are people born {star_sign}",
+                        "i am a {star_sign} which dates  are also {star_sign}",
+                        "when do {star_sign} have their birthdays",
+                        "what dates are {star_sign} born between",
+                        "when are {star_sign} born",
+                        "what time of year are {star_sign} born",
+                        "when are people who are {star_sign} born",
+                        "when does {star_sign} fall",
+                        "what is the date range for {star_sign}"
                     ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "STAR_SIGN",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Pisces",
+                                "synonyms": [
+                                    "Pisceans"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Aquarius",
+                                "synonyms": [
+                                    "Aquarians"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Capricorn",
+                                "synonyms": [
+                                    "Capricorns"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Sagittarius",
+                                "synonyms": [
+                                    "Sagittarians"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Scorpio",
+                                "synonyms": [
+                                    "Scorpions"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Libra",
+                                "synonyms": [
+                                    "Librans"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Virgo",
+                                "synonyms": [
+                                    "Virgoans",
+                                    "Virgos"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Leo",
+                                "synonyms": [
+                                    "Leos"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Cancer",
+                                "synonyms": [
+                                    "Cancers",
+                                    "Cancerians"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Gemini",
+                                "synonyms": [
+                                    "Geminis"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Taurus",
+                                "synonyms": [
+                                    "Taureans"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Aries",
+                                "synonyms": [
+                                    "Ariens"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     }
 }
