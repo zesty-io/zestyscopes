@@ -12,6 +12,7 @@ exports.handler = async function (event, context) {
       .addRequestHandlers(
         LaunchRequestHandler,
         StarSignDatesIntentHandler,
+        MascotForStarSignIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
@@ -36,6 +37,52 @@ const LaunchRequestHandler = {
             .withSimpleCard('Hello World', speechText)
             .getResponse()
     }
+}
+
+const MascotForStarSignIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'MascotForStarSignIntent'
+    },    
+    handle(handlerInput) {
+        return new Promise((resolve, reject) => {
+            const mascot = handlerInput.requestEnvelope.request.intent.slots.mascot.resolutions.resolutionsPerAuthority[0].values[0].value.name
+
+            Request(
+                {
+                    url: `${ZESTY_API_BASE}/starsigns.json`,
+                    json: true
+                }, 
+                (error, response, starSignsInfoArr) => {
+                    let speechText = ''
+
+                    if (response.statusCode !== 200 || error) {
+                        reject()
+                    } else {
+                        for (let starSignInfo of starSignsInfoArr) {
+                            if (starSignInfo.mascot === mascot) {
+                                speechText = `${starSignInfo.name} has ${starSignInfo.mascot} as its symbol.`
+                                break
+                            }
+                        }
+
+                        if (speechText.length === 0) {
+                            // Catch all in unlikely case of no match.
+                            speechText = `Sorry I don't know which sign has ${mascot} as its symbol.`
+                        }
+        
+                        resolve(
+                            handlerInput.responseBuilder
+                                .speak(speechText)
+                                .withSimpleCard(`Star Sign Symbol`, speechText)
+                                .getResponse()  
+                        )    
+                    }
+                }
+            )
+        })
+    }
+
 }
 
 const StarSignDatesIntentHandler = {

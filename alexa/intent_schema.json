@@ -36,6 +36,33 @@
                         "when does {star_sign} fall",
                         "what is the date range for {star_sign}"
                     ]
+                },
+                {
+                    "name": "MascotForStarSignIntent",
+                    "slots": [
+                        {
+                            "name": "mascot",
+                            "type": "STAR_SIGN_MASCOTS"
+                        }
+                    ],
+                    "samples": [
+                        "what's the star sign represented by {mascot}",
+                        "what's the sign for {mascot}",
+                        "which horoscope uses {mascot}",
+                        "what's the sign associated with {mascot}",
+                        "what's the star sign for {mascot}",
+                        "which sign's symbol is {mascot}",
+                        "what sign's symbol is {mascot}",
+                        "{mascot} is the symbol for which star sign",
+                        "{mascot} is the symbol for which sign",
+                        "{mascot} is the animal for which star sign",
+                        "{mascot} is the animal for which sign",
+                        "what sign is represented by {mascot}",
+                        "{mascot} is associated with which sign",
+                        "which sign is represented by {mascot}",
+                        "{mascot} is associated with which star sign",
+                        "which star sign is represented by {mascot}"
+                    ]
                 }
             ],
             "types": [
@@ -137,6 +164,118 @@
                                 "value": "Aries",
                                 "synonyms": [
                                     "Ariens"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "STAR_SIGN_MASCOTS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "The Fish",
+                                "synonyms": [
+                                    "Fish"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Water Bearer",
+                                "synonyms": [
+                                    "Water",
+                                    "Water Carrier"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Goat",
+                                "synonyms": [
+                                    "Goat"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Archer",
+                                "synonyms": [
+                                    "Shooter",
+                                    "Bow and Arrow",
+                                    "Bow",
+                                    "Archer"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Scorpion",
+                                "synonyms": [
+                                    "Scorpion"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Scales",
+                                "synonyms": [
+                                    "Weighing Scales",
+                                    "Weights",
+                                    "Scales"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Virgin",
+                                "synonyms": [
+                                    "Virgin"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Lion",
+                                "synonyms": [
+                                    "Lion"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Crab",
+                                "synonyms": [
+                                    "Lobster",
+                                    "Crab"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Twins",
+                                "synonyms": [
+                                    "Sisters",
+                                    "Brothers",
+                                    "Twins"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Bull",
+                                "synonyms": [
+                                    "Cow",
+                                    "Bull"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "The Ram",
+                                "synonyms": [
+                                    "Sheep",
+                                    "Ram"
                                 ]
                             }
                         }
