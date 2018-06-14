@@ -77,6 +77,11 @@
                         }
                     ],
                     "samples": [
+                        "i'm a {star_sign} what's my reading",
+                        "i'm a {star_sign} what's my horoscope",
+                        "what's the latest reading for {star_sign}",
+                        "what's the latest horoscope for {star_sign}",
+                        "what's the current horoscope for {star_sign}",
                         "what's {week} prediction for {star_sign}",
                         "what's the predication for {star_sign}",
                         "tell me {week} reading for {star_sign}",
