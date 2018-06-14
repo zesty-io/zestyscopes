@@ -11,8 +11,10 @@ exports.handler = async function (event, context) {
     skill = Alexa.SkillBuilders.custom()
       .addRequestHandlers(
         LaunchRequestHandler,
+        HoroscopeIntentHandler,
         StarSignDatesIntentHandler,
         MascotForStarSignIntentHandler,
+        TraitsForStarSignIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
@@ -29,13 +31,114 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
     },
     handle(handlerInput) {
-        const speechText = 'Welcome to the Alexa Skills Kit, you can say hello!'
+        const speechText = 'TODO Welcome to the Alexa Skills Kit, you can say hello!'
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard('Hello World', speechText)
+            .withSimpleCard('TODO Hello World', speechText)
             .getResponse()
+    }
+}
+
+const HoroscopeIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'HoroscopeIntent'
+    },
+    handle(handlerInput) {
+        return new Promise((resolve, reject) => {
+            // star_sign will always be present.
+            const starSign = handlerInput.requestEnvelope.request.intent.slots.star_sign.resolutions.resolutionsPerAuthority[0].values[0].value.name
+            
+            // week is not guaranteed to be present.
+            let week = undefined
+
+            Request(
+                {
+                    url: `${ZESTY_API_BASE}/starsigns.json`,
+                    json: true
+                }, 
+                (error, response, starSignsInfoArr) => {
+                    let speechText = ''
+
+                    if (response.statusCode !== 200 || error) {
+                        reject()
+                    } else {
+                        speechText = `Horoscope for ${week} for ${starSign}.  This is under development.`
+
+                        if (speechText.length === 0) {
+                            // Catch all in unlikely case of no match.
+                            speechText = `Error!.`
+                        }
+        
+                        resolve(
+                            handlerInput.responseBuilder
+                                .speak(speechText)
+                                .withSimpleCard(`Horoscope`, speechText)
+                                .getResponse()  
+                        )    
+                    }
+                }
+            )
+        })
+    }    
+}
+
+const TraitsForStarSignIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'TraitsForStarSignIntent'
+    },
+    handle(handlerInput) {
+        return new Promise((resolve, reject) => {
+            const starSign = handlerInput.requestEnvelope.request.intent.slots.star_sign.resolutions.resolutionsPerAuthority[0].values[0].value.name
+
+            Request(
+                {
+                    url: `${ZESTY_API_BASE}/traits.json`,
+                    json: true
+                }, 
+                (error, response, traitsArr) => {
+                    let speechText = ''
+
+                    if (response.statusCode !== 200 || error) {
+                        reject()
+                    } else {
+                        for (let traits of traitsArr) {
+                            if (traits.sign === starSign) {
+                                // Remove list formatting from the traits...
+                                const characteristics = traits.traits.split('<ul>').join('').split('</ul>').join('').split('</li>').join('').trim().split('<li>')
+
+                                speechText = `Those born under the sign of ${traits.sign} are said to be: `
+
+                                for (let characteristic of characteristics) {
+                                    const trimmedCharacteristic = characteristic.trim()
+
+                                    if (trimmedCharacteristic.length > 0) {
+                                        speechText = `${speechText} ${trimmedCharacteristic}. `
+                                    }
+                                }
+                                
+                                break
+                            }
+                        }
+
+                        if (speechText.length === 0) {
+                            // Catch all in unlikely case of no match.
+                            speechText = `Sorry I don't know about characteristics of people born under the sign of ${starSign}.`
+                        }
+        
+                        resolve(
+                            handlerInput.responseBuilder
+                                .speak(speechText)
+                                .withSimpleCard(`${starSign}: Traits`, speechText)
+                                .getResponse()  
+                        )    
+                    }
+                }
+            )
+        })
     }
 }
 

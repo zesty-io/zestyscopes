@@ -20,7 +20,7 @@
                     "slots": [
                         {
                             "name": "star_sign",
-                            "type": "STAR_SIGN"
+                            "type": "STAR_SIGNS"
                         }
                     ],
                     "samples": [
@@ -63,11 +63,55 @@
                         "{mascot} is associated with which star sign",
                         "which star sign is represented by {mascot}"
                     ]
+                },
+                {
+                    "name": "HoroscopeIntent",
+                    "slots": [
+                        {
+                            "name": "star_sign",
+                            "type": "STAR_SIGNS"
+                        },
+                        {
+                            "name": "week",
+                            "type": "HOROSCOPE_WEEKS"
+                        }
+                    ],
+                    "samples": [
+                        "what's {week} prediction for {star_sign}",
+                        "what's the predication for {star_sign}",
+                        "tell me {week} reading for {star_sign}",
+                        "what's the {star_sign} reading {week}",
+                        "tell me {week} horoscope for {star_sign}",
+                        "what's {week} horoscope for {star_sign}",
+                        "what's the {star_sign} horoscope for {week}",
+                        "what's the {star_sign} horoscope",
+                        "tell me the horoscope for {star_sign}",
+                        "what's the reading for {star_sign}",
+                        "what's the horoscope for {star_sign}"
+                    ]
+                },
+                {
+                    "name": "TraitsForStarSignIntent",
+                    "slots": [
+                        {
+                            "name": "star_sign",
+                            "type": "STAR_SIGNS"
+                        }
+                    ],
+                    "samples": [
+                        "tell me about the characteristics of a {star_sign}",
+                        "what are some characteristics of a {star_sign}",
+                        "what are traits of a {star_sign}",
+                        "tell me about people born under {star_sign}",
+                        "tell me about people who are {star_sign}",
+                        "what are people who are {star_sign} like",
+                        "what are {star_sign} like"
+                    ]
                 }
             ],
             "types": [
                 {
-                    "name": "STAR_SIGN",
+                    "name": "STAR_SIGNS",
                     "values": [
                         {
                             "name": {
@@ -276,6 +320,29 @@
                                 "synonyms": [
                                     "Sheep",
                                     "Ram"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "HOROSCOPE_WEEKS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Last week",
+                                "synonyms": [
+                                    "Last week's"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "This week",
+                                "synonyms": [
+                                    "This week's",
+                                    "current",
+                                    "latest"
                                 ]
                             }
                         }
