@@ -2,7 +2,7 @@
 
 const Alexa = require('ask-sdk')
 const Request = require('request')
-const ZESTY_API_BASE = 'http://zestyscopes.zesty.site/-/custom'
+const ZESTY_API_BASE = `${process.env.ZESTY_IO_INSTANCE_URL}/-/custom`
 
 let skill
 
