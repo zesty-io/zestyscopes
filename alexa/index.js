@@ -48,11 +48,17 @@ const HoroscopeIntentHandler = {
     },
     handle(handlerInput) {
         return new Promise((resolve, reject) => {
+            const requestSlots = handlerInput.requestEnvelope.request.intent.slots
+
             // star_sign will always be present.
-            const starSign = handlerInput.requestEnvelope.request.intent.slots.star_sign.resolutions.resolutionsPerAuthority[0].values[0].value.name
+            const starSign = requestSlots.star_sign.resolutions.resolutionsPerAuthority[0].values[0].value.name
             
-            // week is not guaranteed to be present.
-            let week = undefined
+            // week is not guaranteed to be present so default to This week.
+            let week = 'This week'
+
+            if (requestSlots.week.confirmationStatus !== 'NONE') {
+                week = requestSlots.week.resolutions.resolutionsPerAuthority[0].values[0].value.name
+            }
 
             Request(
                 {
@@ -65,7 +71,7 @@ const HoroscopeIntentHandler = {
                     if (response.statusCode !== 200 || error) {
                         reject()
                     } else {
-                        speechText = `Horoscope for ${week} for ${starSign}.  This is under development.`
+                        speechText = `Horoscope for ${week.toLowerCase()} for ${starSign}.  This is under development.`
 
                         if (speechText.length === 0) {
                             // Catch all in unlikely case of no match.
