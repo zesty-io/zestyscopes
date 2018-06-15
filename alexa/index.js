@@ -56,26 +56,33 @@ const HoroscopeIntentHandler = {
             // week is not guaranteed to be present so default to This week.
             let week = 'This week'
 
-            if (requestSlots.week.confirmationStatus !== 'NONE') {
+            if (requestSlots.week.hasOwnProperty('resolutions')) {
                 week = requestSlots.week.resolutions.resolutionsPerAuthority[0].values[0].value.name
             }
 
+            // TODO filter this on Zesty side...
             Request(
                 {
-                    url: `${ZESTY_API_BASE}/starsigns.json`,
+                    url: `${ZESTY_API_BASE}/readings.json`,
                     json: true
                 }, 
-                (error, response, starSignsInfoArr) => {
+                (error, response, horoscopesArr) => {
                     let speechText = ''
 
                     if (response.statusCode !== 200 || error) {
                         reject()
                     } else {
-                        speechText = `Horoscope for ${week.toLowerCase()} for ${starSign}.  This is under development.`
+                        for (let horoscope of horoscopesArr) {
+                            if (horoscope.sign === starSign && horoscope.date === week) {
+                                speechText = `Horoscope for ${week.toLowerCase()} for ${starSign}: ${horoscope.reading}`
+                                break;
+                            }
+                        }
+
 
                         if (speechText.length === 0) {
                             // Catch all in unlikely case of no match.
-                            speechText = `Error!.`
+                            speechText = `Sorry I can't help with that right now.`
                         }
         
                         resolve(
