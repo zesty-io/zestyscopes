@@ -215,13 +215,12 @@ const StarSignDatesIntentHandler = {
                     url: `${ZESTY_API_BASE}/starsign.json?sign=${starSign}`,
                     json: true
                 }, 
-                (error, response, starSignInfoArr) => {
+                (error, response, starSignInfo) => {
                     let speechText
 
                     if (response.statusCode !== 200 || error) {
                         reject()
                     } else {
-                        const starSignInfo = starSignInfoArr[0]
                         speechText = `People with birthdays between ${starSignInfo.startDate} and ${starSignInfo.endDate} have ${starSign} as their sign.`
         
                         resolve(
@@ -260,11 +259,11 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent')
     },
     handle(handlerInput) {
-        const speechText = 'Goodbye!'
+        const speechText = 'TODO Goodbye!'
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .withSimpleCard('Hello World', speechText)
+            .withSimpleCard('TODO Hello World', speechText)
             .getResponse()
     }
 }
@@ -287,8 +286,8 @@ const ErrorHandler = {
       console.log("Error handled: "+error.message+"}")
   
       return handlerInput.responseBuilder
-        .speak('Sorry, I can\'t understand the command. Please say again.')
-        .reprompt('Sorry, I can\'t understand the command. Please say again.')
+        .speak('Sorry, I can\'t understand that. Please try again.')
+        .reprompt('Sorry, I can\'t understand that. Please try again.')
         .getResponse()
     },
   }
