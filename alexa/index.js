@@ -166,26 +166,14 @@ const MascotForStarSignIntentHandler = {
 
             Request(
                 {
-                    url: `${ZESTY_API_BASE}/starsigns.json`,
+                    url: `${ZESTY_API_BASE}/starsignbymascot.json?mascot=${mascot}`,
                     json: true
                 }, 
-                (error, response, starSignsInfoArr) => {
-                    let speechText = ''
-
+                (error, response, starSign) => {
                     if (response.statusCode !== 200 || error) {
                         reject()
                     } else {
-                        for (let starSignInfo of starSignsInfoArr) {
-                            if (starSignInfo.mascot === mascot) {
-                                speechText = `${starSignInfo.name} has ${starSignInfo.mascot} as its symbol.`
-                                break
-                            }
-                        }
-
-                        if (speechText.length === 0) {
-                            // Catch all in unlikely case of no match.
-                            speechText = `Sorry I don't know which sign has ${mascot} as its symbol.`
-                        }
+                        const speechText = `${starSign.name} has ${starSign.mascot} as its symbol.`
         
                         resolve(
                             handlerInput.responseBuilder
