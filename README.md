@@ -48,6 +48,13 @@ http://zestyscopes.zesty.site/-/custom/starsignbymascot.json?mascot=The%20Ram
 
 [Try it](http://zestyscopes.zesty.site/-/custom/starsignbymascot.json?mascot=The%20Ram).
 
+### Get a Prompt by Key
+
+```
+http://zestyscopes.zesty.site/-/custom/prompt.json?key=welcome
+```
+
+[Try it](http://zestyscopes.zesty.site/-/custom/prompt.json?key=welcome).
 
 ## Resources
 
