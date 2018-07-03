@@ -77,7 +77,6 @@ const HoroscopeIntentHandler = {
                             }
                         }
 
-
                         if (speechText.length === 0) {
                             // Catch all in unlikely case of no match.
                             speechText = `Sorry I can't help with that right now.`
@@ -233,7 +232,7 @@ const HelpIntentHandler = {
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard('Hello World', speechText)
+            .withSimpleCard('Help', speechText)
             .getResponse()
     }
 }
