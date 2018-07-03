@@ -40,6 +40,14 @@ http://zestyscopes.zesty.site/-/custom/readings.json
 
 [Try it](http://zestyscopes.zesty.site/-/custom/readings.json).
 
+### Get the Mascot for a Star Sign
+
+```
+http://zestyscopes.zesty.site/-/custom/starsignbymascot.json?mascot=The%20Ram
+```
+
+[Try it](http://zestyscopes.zesty.site/-/custom/starsignbymascot.json?mascot=The%20Ram).
+
 
 ## Resources
 
