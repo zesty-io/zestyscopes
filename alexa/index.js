@@ -48,16 +48,14 @@ const HoroscopeIntentHandler = {
     },
     handle(handlerInput) {
         return new Promise((resolve, reject) => {
-            const requestSlots = handlerInput.requestEnvelope.request.intent.slots
-
             // star_sign will always be present.
-            const starSign = requestSlots.star_sign.resolutions.resolutionsPerAuthority[0].values[0].value.name
+            const starSign = getSlotValue('star_sign', handlerInput)
             
             // week is not guaranteed to be present so default to This week.
-            let week = 'This week'
+            let week = getSlotValue('week', handlerInput)
 
-            if (requestSlots.week.hasOwnProperty('resolutions')) {
-                week = requestSlots.week.resolutions.resolutionsPerAuthority[0].values[0].value.name
+            if (week === undefined) {
+                week = 'This week'
             }
 
             // TODO filter this on Zesty side...
@@ -105,7 +103,7 @@ const TraitsForStarSignIntentHandler = {
     },
     handle(handlerInput) {
         return new Promise((resolve, reject) => {
-            const starSign = handlerInput.requestEnvelope.request.intent.slots.star_sign.resolutions.resolutionsPerAuthority[0].values[0].value.name
+            const starSign = getSlotValue('star_sign', handlerInput)
 
             Request(
                 {
@@ -162,7 +160,7 @@ const MascotForStarSignIntentHandler = {
     },    
     handle(handlerInput) {
         return new Promise((resolve, reject) => {
-            const mascot = handlerInput.requestEnvelope.request.intent.slots.mascot.resolutions.resolutionsPerAuthority[0].values[0].value.name
+            const mascot = getSlotValue('mascot', handlerInput)
 
             Request(
                 {
@@ -196,7 +194,7 @@ const StarSignDatesIntentHandler = {
     },
     handle(handlerInput) {
         return new Promise((resolve, reject) => {
-            const starSign = handlerInput.requestEnvelope.request.intent.slots.star_sign.resolutions.resolutionsPerAuthority[0].values[0].value.name
+            const starSign = getSlotValue('star_sign', handlerInput)
 
             Request(
                 {
@@ -278,4 +276,18 @@ const ErrorHandler = {
         .reprompt('Sorry, I can\'t understand that. Please try again.')
         .getResponse()
     },
+  }
+
+  const getSlotValue = (slotName, handlerInput) => {
+    const requestSlots = handlerInput.requestEnvelope.request.intent.slots
+
+    if (! requestSlots.hasOwnProperty(slotName)) {
+        return undefined
+    }
+
+    if (! requestSlots[slotName].hasOwnProperty('resolutions')) {
+        return undefined
+    }
+
+    return requestSlots[slotName].resolutions.resolutionsPerAuthority[0].values[0].value.name
   }
