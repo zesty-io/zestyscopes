@@ -31,12 +31,13 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
     },
     handle(handlerInput) {
+        // http://zestyscopes.zesty.site/-/custom/prompt.json?key=welcome
         const speechText = 'TODO Welcome to the Alexa Skills Kit, you can say hello!'
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard('TODO Hello World', speechText)
+            .withSimpleCard('Welcome', speechText)
             .getResponse()
     }
 }
@@ -227,6 +228,7 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent'
     },
     handle(handlerInput) {
+        // key: http://zestyscopes.zesty.site/-/custom/prompt.json?key=help
         const speechText = 'You can say hello to me!'
 
         return handlerInput.responseBuilder
