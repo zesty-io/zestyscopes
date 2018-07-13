@@ -80,6 +80,7 @@ const HoroscopeIntentHandler = {
 
                         if (speechText.length === 0) {
                             // Catch all in unlikely case of no match.
+                            // http://zestyscopes.zesty.site/-/custom/prompt.json?key=no_data
                             speechText = `Sorry I can't help with that right now.`
                         }
         
@@ -137,7 +138,8 @@ const TraitsForStarSignIntentHandler = {
 
                         if (speechText.length === 0) {
                             // Catch all in unlikely case of no match.
-                            speechText = `Sorry I don't know about characteristics of people born under the sign of ${starSign}.`
+                            // http://zestyscopes.zesty.site/-/custom/prompt.json?key=no_data
+                            speechText = `Sorry I can't help with that right now.`
                         }
         
                         resolve(
@@ -273,6 +275,7 @@ const ErrorHandler = {
       console.log("Error handled: "+error.message+"}")
   
       return handlerInput.responseBuilder
+        // http://zestyscopes.zesty.site/-/custom/prompt.json?general_error
         .speak('Sorry, I can\'t understand that. Please try again.')
         .reprompt('Sorry, I can\'t understand that. Please try again.')
         .getResponse()
