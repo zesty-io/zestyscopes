@@ -305,5 +305,11 @@ const ErrorHandler = {
         return undefined
     }
 
-    return requestSlots[slotName].resolutions.resolutionsPerAuthority[0].values[0].value.name
+    for (let r of requestSlots[slotName].resolutions.resolutionsPerAuthority) {
+        if (r.hasOwnProperty('values')) {
+            return r.values[0].value.name
+        }
+    }
+
+    return undefined
   }
