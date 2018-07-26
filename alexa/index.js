@@ -31,14 +31,26 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
     },
     handle(handlerInput) {
-        // http://zestyscopes.zesty.site/-/custom/prompt.json?key=welcome
-        const speechText = 'TODO Welcome to the Alexa Skills Kit, you can say hello!'
-
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(speechText)
-            .withSimpleCard('Welcome', speechText)
-            .getResponse()
+        return new Promise((resolve, reject) => {
+            Request(
+                {
+                    url: `${ZESTY_API_BASE}/prompt.json?key=welcome`,
+                    json: true
+                }, (error, response, welcome) => {
+                    if (response.statusCode !== 200 || error) {
+                        reject()
+                    } else {
+                        resolve(
+                            handlerInput.responseBuilder
+                                .speak(welcome.text)
+                                .reprompt(welcome.text)
+                                .withSimpleCard('Welcome', welcome.text)
+                                .getResponse()         
+                        )
+                    }
+                }
+            )
+        })
     }
 }
 
