@@ -24,6 +24,7 @@
                         }
                     ],
                     "samples": [
+                        "what dates is {star_sign} the sign for",
                         "when is {star_sign}",
                         "what time of year are people born under {star_sign}",
                         "what time of year are people born {star_sign}",
@@ -34,8 +35,7 @@
                         "what time of year are {star_sign} born",
                         "when are people who are {star_sign} born",
                         "when does {star_sign} fall",
-                        "what is the date range for {star_sign}",
-                        "what dates is {star_sign} the sign for"
+                        "what is the date range for {star_sign}"
                     ]
                 },
                 {
@@ -93,7 +93,9 @@
                         "what's the {star_sign} horoscope",
                         "tell me the horoscope for {star_sign}",
                         "what's the reading for {star_sign}",
-                        "what's the horoscope for {star_sign}"
+                        "what's the horoscope for {star_sign}",
+                        "what's the reading for {star_sign} {week}",
+                        "what's {week} reading for {star_sign}"
                     ]
                 },
                 {
@@ -338,6 +340,9 @@
                             "name": {
                                 "value": "Last week",
                                 "synonyms": [
+                                    "prior",
+                                    "previous",
+                                    "last week's",
                                     "Last week's"
                                 ]
                             }
@@ -346,6 +351,8 @@
                             "name": {
                                 "value": "This week",
                                 "synonyms": [
+                                    "newest",
+                                    "this week's",
                                     "This week's",
                                     "current",
                                     "latest"
