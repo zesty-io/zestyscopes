@@ -34,7 +34,8 @@
                         "what time of year are {star_sign} born",
                         "when are people who are {star_sign} born",
                         "when does {star_sign} fall",
-                        "what is the date range for {star_sign}"
+                        "what is the date range for {star_sign}",
+                        "what dates is {star_sign} the sign for"
                     ]
                 },
                 {
