@@ -242,14 +242,26 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent'
     },
     handle(handlerInput) {
-        // key: http://zestyscopes.zesty.site/-/custom/prompt.json?key=help
-        const speechText = 'You can say hello to me!'
-
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(speechText)
-            .withSimpleCard('Help', speechText)
-            .getResponse()
+        return new Promise((resolve, reject) => {
+            Request(
+                {
+                    url: `${ZESTY_API_BASE}/prompt.json?key=help`,
+                    json: true
+                }, (error, response, help) => {
+                    if (response.statusCode !== 200 || error) {
+                        reject()
+                    } else {
+                        resolve(
+                            handlerInput.responseBuilder
+                                .speak(help.text)
+                                .reprompt(help.text)
+                                .withSimpleCard('Help', help.text)
+                                .getResponse()         
+                        )
+                    }
+                }
+            )
+        })
     }
 }
 
