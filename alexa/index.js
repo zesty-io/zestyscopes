@@ -272,12 +272,24 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent')
     },
     handle(handlerInput) {
-        const speechText = 'TODO Goodbye!'
-
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .withSimpleCard('TODO Hello World', speechText)
-            .getResponse()
+        return new Promise((resolve, reject) => {
+            Request(
+                {
+                    url: `${ZESTY_API_BASE}/prompt.json?key=end_session`,
+                    json: true
+                }, (error, response, goodbye) => {
+                    if (response.statusCode !== 200 || error) {
+                        reject()
+                    } else {
+                        resolve(
+                            handlerInput.responseBuilder
+                                .speak(goodbye.text)
+                                .getResponse()         
+                        )
+                    }
+                }
+            )
+        })        
     }
 }
 
