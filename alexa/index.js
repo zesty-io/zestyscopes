@@ -92,16 +92,31 @@ const HoroscopeIntentHandler = {
 
                         if (speechText.length === 0) {
                             // Catch all in unlikely case of no match.
-                            // http://zestyscopes.zesty.site/-/custom/prompt.json?key=no_data
-                            speechText = `Sorry I can't help with that right now.`
+                            Request(
+                                {
+                                    url: `${ZESTY_API_BASE}/prompt.json?key=no_data`,
+                                    json: true
+                                },
+                                (error, response, sorry) => {
+                                    if (response.statusCode !== 200 || error) {
+                                        reject()
+                                    } else {
+                                        resolve(
+                                            handlerInput.responseBuilder
+                                                .speak(sorry.text)
+                                                .getResponse()  
+                                        )   
+                                    }
+                                }
+                            )
+                        } else {
+                            resolve(
+                                handlerInput.responseBuilder
+                                    .speak(speechText)
+                                    .withSimpleCard(`Horoscope`, speechText)
+                                    .getResponse()  
+                            )    
                         }
-        
-                        resolve(
-                            handlerInput.responseBuilder
-                                .speak(speechText)
-                                .withSimpleCard(`Horoscope`, speechText)
-                                .getResponse()  
-                        )    
                     }
                 }
             )
@@ -150,16 +165,31 @@ const TraitsForStarSignIntentHandler = {
 
                         if (speechText.length === 0) {
                             // Catch all in unlikely case of no match.
-                            // http://zestyscopes.zesty.site/-/custom/prompt.json?key=no_data
-                            speechText = `Sorry I can't help with that right now.`
+                            Request(
+                                {
+                                    url: `${ZESTY_API_BASE}/prompt.json?key=no_data`,
+                                    json: true
+                                },
+                                (error, response, sorry) => {
+                                    if (response.statusCode !== 200 || error) {
+                                        reject()
+                                    } else {
+                                        resolve(
+                                            handlerInput.responseBuilder
+                                                .speak(sorry.text)
+                                                .getResponse()
+                                        )
+                                    }
+                                }
+                            )
+                        } else {
+                            resolve(
+                                handlerInput.responseBuilder
+                                    .speak(speechText)
+                                    .withSimpleCard(`${starSign}: Traits`, speechText)
+                                    .getResponse()  
+                            )    
                         }
-        
-                        resolve(
-                            handlerInput.responseBuilder
-                                .speak(speechText)
-                                .withSimpleCard(`${starSign}: Traits`, speechText)
-                                .getResponse()  
-                        )    
                     }
                 }
             )
@@ -178,19 +208,23 @@ const MascotForStarSignIntentHandler = {
 
             Request(
                 {
-                    url: `${ZESTY_API_BASE}/starsignbymascot.json?mascot=${mascot}`,
+                    url: `${ZESTY_API_BASE}/alexastarsignbymascot.json?mascot=${mascot}`,
                     json: true
                 }, 
                 (error, response, starSign) => {
                     if (response.statusCode !== 200 || error) {
                         reject()
                     } else {
-                        const speechText = `${starSign.name} has ${starSign.mascot} as its symbol.`
-        
                         resolve(
                             handlerInput.responseBuilder
-                                .speak(speechText)
-                                .withSimpleCard(`Star Sign Symbol`, speechText)
+                                .speak(starSign.speechResponse)
+                                .withSimpleCard(starSign.cardTitle, starSign.speechResponse)
+                                .withStandardCard(
+                                    starSign.cardTitle, 
+                                    starSign.cardContent,
+                                    starSign.cardImage,
+                                    starSign.cardImage
+                                )
                                 .getResponse()  
                         )    
                     }
@@ -308,17 +342,30 @@ const ErrorHandler = {
       return true
     },
     handle(handlerInput, error) {
-      console.log("Error handled: "+error.message+"}")
-  
-      return handlerInput.responseBuilder
-        // http://zestyscopes.zesty.site/-/custom/prompt.json?general_error
-        .speak('Sorry, I can\'t understand that. Please try again.')
-        .reprompt('Sorry, I can\'t understand that. Please try again.')
-        .getResponse()
-    },
-  }
+        console.log(`Error handled: ${error.message}`)
 
-  const getSlotValue = (slotName, handlerInput) => {
+        return new Promise((resolve, reject) => {
+            Request(
+            {
+                url: `${ZESTY_API_BASE}/prompt.json?key=general_error`,
+                json: true
+            }, (error, response, apology) => {
+                if (response.statusCode !== 200 || error) {
+                    reject()
+                } else {
+                    resolve(
+                        handlerInput.responseBuilder
+                            .speak(apology.text)
+                            .reprompt(apology.text)
+                            .getResponse()         
+                    )
+                }
+            })
+        })
+    }
+}
+
+const getSlotValue = (slotName, handlerInput) => {
     const requestSlots = handlerInput.requestEnvelope.request.intent.slots
 
     if (! requestSlots.hasOwnProperty(slotName)) {
@@ -336,4 +383,4 @@ const ErrorHandler = {
     }
 
     return undefined
-  }
+}
