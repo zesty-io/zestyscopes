@@ -71,7 +71,6 @@ const HoroscopeIntentHandler = {
                 week = 'This week'
             }
 
-            // TODO filter this on Zesty side...
             Request(
                 {
                     url: `${ZESTY_API_BASE}/readings.json`,
@@ -218,7 +217,6 @@ const MascotForStarSignIntentHandler = {
                         resolve(
                             handlerInput.responseBuilder
                                 .speak(starSign.speechResponse)
-                                .withSimpleCard(starSign.cardTitle, starSign.speechResponse)
                                 .withStandardCard(
                                     starSign.cardTitle, 
                                     starSign.cardContent,
@@ -246,21 +244,22 @@ const StarSignDatesIntentHandler = {
 
             Request(
                 {
-                    url: `${ZESTY_API_BASE}/starsign.json?sign=${starSign}`,
+                    url: `${ZESTY_API_BASE}/alexastarsign.json?sign=${starSign}`,
                     json: true
                 }, 
                 (error, response, starSignInfo) => {
-                    let speechText
-
                     if (response.statusCode !== 200 || error) {
                         reject()
-                    } else {
-                        speechText = `People with birthdays between ${starSignInfo.startDate} and ${starSignInfo.endDate} have ${starSign} as their sign.`
-        
+                    } else {       
                         resolve(
                             handlerInput.responseBuilder
-                                .speak(speechText)
-                                .withSimpleCard(`Dates for ${starSign}`, speechText)
+                                .speak(starSignInfo.speechResponse)
+                                .withStandardCard(
+                                    starSignInfo.cardTitle, 
+                                    starSignInfo.cardContent,
+                                    starSignInfo.cardImage,
+                                    starSignInfo.cardImage
+                                )
                                 .getResponse()  
                         )    
                     }
