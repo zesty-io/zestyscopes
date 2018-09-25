@@ -230,7 +230,6 @@ const MascotForStarSignIntentHandler = {
             )
         })
     }
-
 }
 
 const StarSignDatesIntentHandler = {
@@ -331,7 +330,7 @@ const SessionEndedRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest'
     },
     handle(handlerInput) {
-        //any cleanup logic goes here
+        // any cleanup logic goes here - we don't need any.
         return handlerInput.responseBuilder.getResponse()
     }
 }
