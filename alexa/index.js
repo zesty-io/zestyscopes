@@ -4,28 +4,6 @@ const Alexa = require('ask-sdk')
 const Request = require('request')
 const ZESTY_API_BASE = `${process.env.ZESTY_IO_INSTANCE_URL}/-/custom`
 
-let skill
-
-exports.handler = async function (event, context) {
-  if (!skill) {
-    skill = Alexa.SkillBuilders.custom()
-      .addRequestHandlers(
-        LaunchRequestHandler,
-        HoroscopeIntentHandler,
-        StarSignDatesIntentHandler,
-        MascotForStarSignIntentHandler,
-        TraitsForStarSignIntentHandler,
-        HelpIntentHandler,
-        CancelAndStopIntentHandler,
-        SessionEndedRequestHandler,
-      )
-      .addErrorHandlers(ErrorHandler)
-      .create()
-  }
-  
-  return skill.invoke(event,context)
-}
-
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
@@ -382,3 +360,17 @@ const getSlotValue = (slotName, handlerInput) => {
 
     return undefined
 }
+
+exports.handler = Alexa.SkillBuilders.custom()
+    .addRequestHandlers(
+        LaunchRequestHandler,
+        HoroscopeIntentHandler,
+        StarSignDatesIntentHandler,
+        MascotForStarSignIntentHandler,
+        TraitsForStarSignIntentHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler,
+    )
+    .addErrorHandlers(ErrorHandler)
+    .lambda()
