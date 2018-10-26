@@ -11,7 +11,7 @@ This also uses [Dashbot](https://www.dashbot.io/) for analytics.
 
 ## Webinar
 
-Watch me present a walkthrough of this codebase and how to use it with Zesty.io CMS in a [webinar recording on YouTube](https://www.youtube.com/watch?v=pIlA7T2TQK4).
+Watch a walkthrough of this codebase and how to use it with Zesty.io CMS in a [webinar recording on YouTube](https://www.youtube.com/watch?v=pIlA7T2TQK4).
 
 For more details on the Dashbot analytics integration and platform, watch this [webinar recording on YouTube](https://www.youtube.com/watch?v=TOTrsVT_kp8).
 
