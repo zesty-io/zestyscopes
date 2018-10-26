@@ -1,9 +1,15 @@
 # Zesty Scopes
 
+## Introduction
+
 A project to present horoscope content managed by the Zesty.io Content Management System for delivery to multiple channels:
 
 * [Website](http://zestyscopes.zesty.site/) (presentation and hosting also by Zesty.io)
 * Amazon Alexa Skill
+
+## Webinar
+
+Watch me present a walkthrough of this codebase and how to use it with Zesty.io CMS in a [webinar recording on YouTube](https://www.youtube.com/watch?v=pIlA7T2TQK4).
 
 ## API Endpoints
 
