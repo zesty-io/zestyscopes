@@ -3,6 +3,7 @@
 const Alexa = require('ask-sdk')
 const Request = require('request')
 const ZESTY_API_BASE = `${process.env.ZESTY_IO_INSTANCE_URL}/-/custom`
+const dashbot = require('dashbot')(process.env.DASHBOT_API_KEY).alexa
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -361,7 +362,7 @@ const getSlotValue = (slotName, handlerInput) => {
     return undefined
 }
 
-exports.handler = Alexa.SkillBuilders.custom()
+exports.handler = dashbot.handler(Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         HoroscopeIntentHandler,
@@ -374,3 +375,4 @@ exports.handler = Alexa.SkillBuilders.custom()
     )
     .addErrorHandlers(ErrorHandler)
     .lambda()
+)
